@@ -1,0 +1,95 @@
+\documentclass[a4paper, 12pt]{report}
+\usepackage{amsmath, amssymb, amstext, amsthm, amssymb}
+\usepackage[
+    type={CC},
+    modifier={by-nc-sa},
+    version={4.0},
+    lang={it},
+]{doclicense}
+\usepackage[italian]{babel}
+\usepackage{tikz}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{example}{Esempio}[definition]
+\newtheorem{remark}{Osservazione}[definition]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{corollary}{Corollario}[theorem]
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\begin{document}
+
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{5cm}
+        \Huge{Formulario di Fisica}\\[1cm]
+        \Large{Mario Merlo}\\
+        \Large{https://www.github.com/MrVideo}\\
+        \Large{Politecnico di Milano}\\[7,5cm]
+    \end{center}
+    \doclicenseThis
+\end{titlepage}
+
+\chapter{Strumenti di base}
+
+\begin{definition}
+    Una {\bf Grandezza Fisica} è un insieme di enti del mondo, non meglio precisati, tra i quali possiamo stabilire:
+    \begin{itemize}
+        \item Una relazione d'ordine
+        \item Operazioni di somma o differenza
+        \item Operazioni di prodotto per scalari o per qualsiasi numero reale
+        \item Operazioni di prodotto scalare tra gli enti
+    \end{itemize}
+\end{definition}
+
+\begin{example}
+    Alcune grandezze fisiche:
+    \begin{itemize}
+        \item Lunghezza: $[L]$
+        \item Massa: $[M]$
+        \item Intervallo di tempo: $[T]$
+        \item Forza: $[F]$
+        \item Lavoro: $[W]$
+    \end{itemize}
+\end{example}
+
+\begin{definition}
+    Un {\bf Indice di Stato Fisico} è un insieme di enti del mondo non meglio precisato tra i quali possiamo stabilire:
+    \begin{itemize}
+        \item Una relazione di uguaglianza
+        \item Operazioni di somma e differenza
+        \item Operazioni di prodotto per scalari
+        \item Operazioni di prodotto scalare
+    \end{itemize}
+\end{definition}
+
+\begin{example}
+    Un esempio di indice di stato fisico sono le coordinate geometriche:\\\\
+    \begin{tikzpicture}
+        \draw (0,0) -- (5,0);
+        \draw (1,0) circle [radius=1pt];
+        \draw (1,0) node[anchor=south] {$P_1$};
+        \draw (4,0) circle [radius=1pt];
+        \draw (4,0) node[anchor=south] {$P_2$};
+    \end{tikzpicture}
+    Noi possiamo individuare due punti su una retta, ma non possiamo ordinarli...\\
+    \begin{tikzpicture}
+        \draw[->] (0,0) -- (5,0);
+        \draw (1,0) circle [radius=1pt];
+        \draw (1,0) node[anchor=south] {$P_1$};
+        \draw (4,0) circle [radius=1pt];
+        \draw (4,0) node[anchor=south] {$P_2$};
+    \end{tikzpicture}
+    ... Ma aggiungendo un verso, una convenzione, possiamo farlo.
+\end{example}
+
+\end{document}
