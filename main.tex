@@ -1,5 +1,5 @@
 \documentclass[a4paper, 12pt]{report}
-\usepackage{amsmath, amssymb, amstext, amsthm, amssymb}
+\usepackage{amsmath, amssymb, amstext, amsthm, amssymb, leftidx, siunitx}
 \usepackage[
     type={CC},
     modifier={by-nc-sa},
@@ -8,6 +8,8 @@
 ]{doclicense}
 \usepackage[italian]{babel}
 \usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definizione}[chapter]
@@ -27,7 +29,6 @@
 
 \begin{document}
 
-
 \begin{titlepage}
     \begin{center}
         \vspace*{5cm}
@@ -40,6 +41,8 @@
 \end{titlepage}
 
 \chapter{Strumenti di base}
+
+\section{Grandezze fisiche ed indici di stato fisico}
 
 \begin{definition}
     Una {\bf Grandezza Fisica} è un insieme di enti del mondo, non meglio precisati, tra i quali possiamo stabilire:
@@ -73,23 +76,157 @@
 \end{definition}
 
 \begin{example}
-    Un esempio di indice di stato fisico sono le coordinate geometriche:\\\\
-    \begin{tikzpicture}
-        \draw (0,0) -- (5,0);
-        \draw (1,0) circle [radius=1pt];
-        \draw (1,0) node[anchor=south] {$P_1$};
-        \draw (4,0) circle [radius=1pt];
-        \draw (4,0) node[anchor=south] {$P_2$};
-    \end{tikzpicture}
-    Noi possiamo individuare due punti su una retta, ma non possiamo ordinarli...\\
-    \begin{tikzpicture}
-        \draw[->] (0,0) -- (5,0);
-        \draw (1,0) circle [radius=1pt];
-        \draw (1,0) node[anchor=south] {$P_1$};
-        \draw (4,0) circle [radius=1pt];
-        \draw (4,0) node[anchor=south] {$P_2$};
-    \end{tikzpicture}
+    Un esempio di indice di stato fisico sono le coordinate geometriche:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) -- (5,0);
+            \draw (1,0) circle [radius=1pt];
+            \draw (1,0) node[anchor=south] {$P_1$};
+            \draw (4,0) circle [radius=1pt];
+            \draw (4,0) node[anchor=south] {$P_2$};
+        \end{tikzpicture}
+    \end{center}
+    Noi possiamo individuare due punti su una retta, ma non possiamo ordinarli...
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) -- (5,0);
+            \draw (1,0) circle [radius=1pt];
+            \draw (1,0) node[anchor=south] {$P_1$};
+            \draw (4,0) circle [radius=1pt];
+            \draw (4,0) node[anchor=south] {$P_2$};
+        \end{tikzpicture}
+    \end{center}
     ... Ma aggiungendo un verso, una convenzione, possiamo farlo.
 \end{example}
+
+\begin{remark}
+    Grandezze fisiche ed indici di stato fisico presentano un {\bf rapporto di corrispondenza}:
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) -- (5,0);
+            \draw (1,0) circle [radius=1pt];
+            \draw (1,0) node[anchor=south] {$P_1$};
+            \draw (4,0) circle [radius=1pt];
+            \draw (4,0) node[anchor=south] {$P_2$};
+            \draw (1,0) node[anchor=north] {$x_1$};
+            \draw (4,0) node[anchor=north] {$x_2$};
+            \draw[red] (1,0) -- (4,0);
+        \end{tikzpicture}
+    \end{center}
+    Possiamo definire una {\bf distanza} tra $P_1$ e $P_2$:
+    \begin{center}
+        $L = |x_2 - x_1|$\\
+    \end{center}
+    Questa distanza è una {\bf grandezza fisica}, nello specifico una lunghezza.
+\end{remark}
+
+\section{Misure di una grandezza}
+
+La misura di una grandezza è una {\it procedura convenuta e codificata}, tipicamente strumentale, finalizzata a caratterizzare quantitativamente una grandezza fisica attraverso un numero reale.
+Viene scelto, a questo scopo, un elemento all'interno della classe di grandezza, detto {\bf unità di misura}, $U$.
+
+\begin{definition}
+    La misura di una grandezza $G$ è il numero di volte in cui $U$ è contenuta in $G$: $G = nU, n \in \R$
+\end{definition}
+
+\begin{remark}
+    Come cambiare unità di misura?
+    $U \rightarrow U', n = \frac{G}{U}, n' = \frac{G}{U'}$
+    Devo confrontare $n$ ed $n'$. Come?
+    $n' = \frac{G}{U'} = \frac{G}{U} \cdot \frac{U}{U'} = n \cdot \frac{U}{U'}$, dove $\frac{U}{U'}$ è detto {\bf fattore di ragguaglio}.
+\end{remark}
+
+\subsection{Grandezze fisiche fondamentali}
+
+\begin{definition}
+    Si definiscono {\it fondamentali} le grandezze fisiche per cui il procedimento di misura è {\bf diretto}, ossia per cui non servono altre grandezze.
+\end{definition}
+
+Nel {\bf Sistema Internazionale} (SI), per la meccanica, esse sono:
+\begin{enumerate}
+    \item {\bf Intervallo di tempo} $[T]$:
+        \begin{itemize}
+            \item {\bf Unità di misura}: secondo (\SI{}{s})
+            \item $\SI{1}{s} = \SI{9192631770}{}$ cicli dell'oscillazione elettromagnetica emessa nella transizione tra due livello iperfini dello stato fondamentale dell'isotopo più stabile del Cesio ${}^{133}$Cs.
+        \end{itemize}
+    \item {\bf Lunghezza} $[L]$:
+        \begin{itemize}
+            \item {\bf Unità di misura}: metro (\SI{}{m})
+            \item $\SI{1}{m} = $ lunghezza del tratto percorso dala luce nel vuoto nell'intervallo di tempo pari a $\frac{1}{\SI{299792458}{}}\SI{}{s}$
+        \end{itemize}
+    \item {\bf Massa} $[M]$:
+    \begin{itemize}
+        \item {\bf Unità di misura}: chilogrammo (\SI{}{kg})
+        \item $\SI{1}{kg} = $ massa del campione di platino-iridio conservato a Sévres.
+    \end{itemize}
+\end{enumerate}
+
+Queste grandezze sono riprese dal vecchio sistema $mks$.
+
+\subsection{Grandezze fisiche derivate}
+
+\begin{definition}
+    Si definiscono {\it derivate} le grandezze fisiche ottenute con un processo "indiretto" che le fa derivare da grandezze fondamentali.
+\end{definition}
+
+\begin{example}
+    Alcuni esempi:
+    \begin{itemize}
+        \item {\bf Velocità} $[v]$: $v \triangleq \frac{l}{\Delta t}$
+        \item {\bf Accelerazione} $[a]$: $a \triangleq \frac{\Delta v}{\Delta t}$
+    \end{itemize}
+\end{example}
+
+\subsection{Grandezze supplementari}
+
+Esistono due importanti grandezze supplementari:
+\begin{itemize}
+    \item {\bf Angolo piano}: unità di misura: {\bf Radiante} (\SI{}{rad})
+    \item {\bf Angolo solido}: unità di misura: {\bf Steradiante} (\SI{}{sr})
+\end{itemize}
+
+\begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) circle[radius=1];
+        \draw[->] (0,-1.5) -- (0,1.5);
+        \draw (0,2) node[anchor=east] {$y$};
+        \draw[->] (-1.5,0) -- (1.5,0);
+        \draw (2,0) node[anchor=north] {$x$};
+        \draw[blue,thick] (0,-1) -- (0,0);
+        \draw (0,-0.5) node[anchor=east] {$R$};
+        \filldraw[red,thick,fill=red!20!white] (0,0) -- (1,0) arc [start angle=0, end angle=57.29, radius=1] -- cycle;
+        \draw (0,0) node[anchor=south east] {$\alpha$};
+    \end{tikzpicture}
+\end{center}
+
+$\alpha$ è l'angolo sotteso ad un arco di lunghezza pari al raggio $R$ della circonferenza. $\alpha = \SI{1}{rad}$.
+
+% Placeholder for steradian graph
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}
+            [
+            width=6cm,height=6cm,
+            axis equal,enlargelimits=false,
+            axis lines=none,
+            domain=0:180,samples=21,
+            y domain=0:360,samples y=21,
+            colormap/blackwhite,
+            view={100}{10},
+            ]
+            \addplot3
+            [
+                surf,
+                z buffer=sort,
+                shader=flat,
+                point meta={acos(z/sqrt(x*x+y*y+z*z)) + atan2(y,x)}
+            ]   (
+                {sin(x)*cos(y)},
+                {sin(x)*sin(y)},
+                {cos(x)}
+            );
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
 
 \end{document}
