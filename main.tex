@@ -17,6 +17,7 @@
 \theoremstyle{remark}
 \newtheorem*{example}{Esempio}
 \newtheorem*{remark}{Osservazione}
+\newtheorem*{prop}{Proprietà}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Teorema}[section]
@@ -356,8 +357,43 @@ Se, come accade più in generale, $v_m(t_1, t_2)$ {\it non è costante}, come po
 
 \begin{remark}
     \begin{equation}
-        \lim_{\Delta t \to 0} = \lim_{\Delta t \to 0} \frac{s(t + \Delta t) - s(t)}{\cancelto{0}{t} + \Delta t - \cancelto{0}{t}}
+        \lim_{\Delta t \to 0} v_m(t, t + \Delta t) = \lim_{\Delta t \to 0} \frac{s(t + \Delta t) - s(t)}{\cancelto{0}{t} + \Delta t - \cancelto{0}{t}} = \lim_{\Delta t \to 0} \frac{s(t + \Delta t) - s(t)}{\Delta t} = \frac{ds(t)}{dt}
     \end{equation}
+    Quindi, per definizione, $v(t) = \frac{ds(t)}{dt}$.
+\end{remark}
+
+\begin{prop}
+    Sia nota la legge $v = v(t), \forall t \in [t_1, t_2]$ e sia nota $s$ nell'istante $t_0 \in [t_1, t_2]$, allora {\bf è determinabile la legge dell'ascissa curvilinea}: $s = s(t), \forall t \in [t_1, t_2]$.
+\end{prop}
+
+\begin{proof}
+    Poiché $v(t) = \frac{ds(t)}{dt}$, allora $ds(t) = v(t)dt$. Integrando entrambi i membri tra due estremi opportuni $t_0$, $t \in [t_1, t_2]$:
+    \begin{gather}
+        \nonumber \int_{t_0}^{t} ds(t') = \int_{t_0}^{t} v(t')dt'\\
+        \nonumber s(t) - s(t_0) = \int_{t_0}^{t} v(t')dt'\\
+        s(t) = s(t_0) + \int_{t_0}^{t} v(t')dt'
+    \end{gather}
+    $s(t_0)$ è noto e l'integrale è determinato
+\end{proof}
+
+\begin{definition}
+    {\bf Accelerazione scalare media}
+    \begin{equation}
+        a_m(t_1, t_2) \triangleq \frac{v(t_2) - v(t_1)}{t_2 - t_1} = \frac{\Delta v(t_1, t_2)}{\Delta t}
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    {\bf Moto uniformemente accelerato}: moto in cui $a_m$ tra due istanti qualsiasi è costante:
+    \begin{equation}
+        \forall t_1, t_2, a_m(t_1, t_2) = \overline{a} \mbox{ costante}
+    \end{equation}
+\end{definition}
+
+\begin{remark}
+    \begin{gather}
+        \nonumber a_m(t_1, t_2) \triangleq \frac{v(t_2) - v(t_1)}{t_2 - t_1}, t_1 = 0, t_2 = t \mbox{ generico}\\
+    \end{gather}
 \end{remark}
 
 \end{document}
