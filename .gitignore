@@ -6,6 +6,7 @@
 *.synctex.gz
 *.pdf
 *.out
+*.toc
 
 # File system
 *.DS_Store

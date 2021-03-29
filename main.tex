@@ -1,5 +1,5 @@
 \documentclass[a4paper, 12pt]{report}
-\usepackage{amsmath, amssymb, amstext, amsthm, amssymb, leftidx, siunitx}
+\usepackage{amsmath, amssymb, amstext, amsthm, amssymb, leftidx, siunitx, systeme, cancel}
 \usepackage[
     type={CC},
     modifier={by-nc-sa},
@@ -12,15 +12,17 @@
 \pgfplotsset{compat=1.15}
 
 \theoremstyle{definition}
-\newtheorem{definition}{Definizione}[chapter]
+\newtheorem{definition}{Definizione}[section]
 
 \theoremstyle{remark}
-\newtheorem{example}{Esempio}[definition]
-\newtheorem{remark}{Osservazione}[definition]
+\newtheorem*{example}{Esempio}
+\newtheorem*{remark}{Osservazione}
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{theorem}{Teorema}[section]
 \newtheorem{corollary}{Corollario}[theorem]
+
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{section}.\arabic{equation}}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -39,6 +41,8 @@
     \end{center}
     \doclicenseThis
 \end{titlepage}
+
+\tableofcontents
 
 \chapter{Strumenti di base}
 
@@ -228,5 +232,132 @@ $\alpha$ è l'angolo sotteso ad un arco di lunghezza pari al raggio $R$ della ci
         \end{axis}
     \end{tikzpicture}
 \end{center}
+
+L'angolo sotteso ad una calotta sferica di area $A = R^2$ è pari ad \SI{1}{sr}.
+
+\subsection{Grandezze scalari e grandezze vettoriali}
+
+Esistono fondamentalmente due tipi di grandezze fisiche:
+\begin{itemize}
+    \item {\bf Grandezze scalari}: grandezze la cui misura è definita da un numero reale
+    \item {\bf Grandezze vettoriali}: grandezze la cui misura è definita da più di un numero reale (generalmente 2 o 3).
+\end{itemize}
+
+\begin{example}
+    Alcune grandezze scalari e vettoriali:
+    \begin{itemize}
+        \item {\bf Scalari}: lunghezza, massa, intervallo di tempo.
+        \item {\bf Vettoriali}: velocità, accelerazione, forza.
+    \end{itemize}
+\end{example}
+
+Per definire le grandezze vettoriali si usano o tre numeri reali o una terna composta da:
+\begin{enumerate}
+    \item {\bf Modulo}: numero reale non negativo ($x \in \R, x \geq 0$)
+    \item {\bf Direzione}: una direzione dello spazio
+    \item {\bf Verso}: un verso della direzione suddetta
+\end{enumerate}
+
+\begin{definition}
+    La {\bf dimensione} di una grandezza fisica è l'esponente con cui $A$ compare nella definizione di $G$.
+\end{definition}
+
+\begin{example}
+    $v \triangleq \frac{l}{\Delta t}$
+    $dim = 1$ rispetto a $[L]$ e $dim = -1$ rispetto a $[T]$.
+    Le parentesi quadre sono dette {\bf simbolo dimensionale}.
+\end{example}
+
+\begin{definition}
+    Si definisce {\bf legge fisica} una relazione {\it quantitativa} tra grandezze fisiche espressa attraverso un'equazione tra le misure delle grandezze considerate. 
+\end{definition}
+
+\begin{definition}
+    {\bf Principio di omogeneità}: le equazioni che rappresentano le leggi fisiche devono essere scritte in modo da risultare indipendenti dalle unità di misura scelte per le diverse grandezze fisiche.
+\end{definition}
+
+\begin{remark}
+    Condizione necessaria e sufficiente affinché l'equazione che esprime una legge fisica rispetti il principio di omogeneità è che {\bf i membri dell'equazione abbiano le stesse dimensioni} in termini di grandezze fondamentali.
+\end{remark}
+
+\chapter{Cinematica}
+
+La cinematica è la branca della fisica che studia il moto {\it in senso descrittivo}, prescindendo dalle cause del moto.
+
+\section{Cinematica scalare}
+
+\begin{definition}
+    {\bf Punto materiale}: è un corpo che possiede:
+    \begin{enumerate}
+        \item dimensioni piccole rispetto alla scala delle lunghezze in esame
+        \item una struttura interna {\it non coinvolta} o {\it trascurabile} nel fenomeno in esame
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    {\bf Legge oraria del moto}: equazione che definisce istante per istante, a partire da un dato istante iniziale $t_0$, le coordinate spaziali del punto materiale rispetto ad un dato sistema di riferimento.
+\end{definition}
+
+\begin{example}
+    Una generica legge oraria potrebbe essere:
+    \begin{center}
+        $\systeme*{x = x(t), y = y(t), z = z(t)}, \forall t \geq t_0, x, y, z$ coordinate cartesiane del punto.
+    \end{center}
+\end{example}
+
+\begin{definition}
+    {\bf Traiettoria}: curva dello spazio costituita da tutti e soli i punti geometrici occupato dal punto materiale durante il suo moto.
+\end{definition}
+
+\begin{remark}
+    Il moto può anche essere classificato in base alla sua traiettoria:
+    \begin{itemize}
+        \item {\it Rettilineo}: la traiettoria giace su una {\bf retta}.
+        \item {\it Circolare}: la traiettoria giace su una {\bf circonferenza}.
+        \item {\it Parabolico}: la traiettoria giace su una {\bf parabola}.
+        \item {\it Curvilineo}: la traiettoria giace su una {\bf curva generica} (caso generale).
+    \end{itemize}
+\end{remark}
+
+\begin{definition}
+    {\bf Ascissa curvilinea}: coordinata {\it unidimensionale} curvilinea del punto materiale definita sulla sua traiettoria.
+\end{definition}
+
+\begin{remark}
+    Si può definire la {\bf legge oraria dell'ascissa curvilinea} con l'equazione $s = s(t)$, che definisce il valore di $s(t)$ istante per istante.
+\end{remark}
+
+\begin{definition}
+    {\bf Velocità scalare media tra due istanti}
+    \begin{equation}
+        v_m(t_1, t_2) \triangleq \frac{s(t_2) - s(t_1)}{t_2 - t_1} \equiv \frac{\Delta s(t_1, t_2)}{\Delta t}
+    \end{equation}
+\end{definition}
+
+\begin{remark}
+    Se risulta $v_m(t_1, t_2) = \overline{v}$ costante, cioè indipendente dalla scelta degli istanti $t_1$ e $t_2$, allora si dice che il moto è {\bf uniforme}.
+\end{remark}
+
+\begin{definition}
+    {\bf Legge dell'ascissa curvilinea per il moto uniforme}
+    \begin{equation}
+        s(t) = s(0) + \overline{v}t
+    \end{equation}
+\end{definition}
+
+Se, come accade più in generale, $v_m(t_1, t_2)$ {\it non è costante}, come possiamo caratterizzare la velocità del moto {\it in un dato istante}?
+
+\begin{definition}
+    {\bf Velocità scalare istantanea}
+    \begin{equation}
+        v(t) \triangleq \lim_{\Delta t \to 0} v_m(t, t + \Delta t)  
+    \end{equation}
+\end{definition}
+
+\begin{remark}
+    \begin{equation}
+        \lim_{\Delta t \to 0} = \lim_{\Delta t \to 0} \frac{s(t + \Delta t) - s(t)}{\cancelto{0}{t} + \Delta t - \cancelto{0}{t}}
+    \end{equation}
+\end{remark}
 
 \end{document}
